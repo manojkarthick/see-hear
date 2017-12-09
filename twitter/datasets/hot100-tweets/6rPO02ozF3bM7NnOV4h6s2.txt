@@ -1,0 +1,5 @@
+('The Luis Oliveira Daily is out! https://t.co/3QrCqQuS2A Stories via @joaovillaverde #mortgage #ux', None, None, 0.0, 0.0, 1.0, 0.0)
+('RT @rickthejizzler: Despacito Remix was nominated for a Grammy 3 times !!! 🎉🎉🎉Congrats @justinbieber 😄 https://t.co/Y6YxZJvyiB', None, None, 0.0, 0.0, 1.0, 0.0)
+('RT @TheJBCrewdotcom: “Despacito” by Luis Fonsi and Daddy Yankee featuring Justin Bieber comes in as 2nd Most Shazamed Song in 2017. https:/…', None, None, 0.0, 0.0, 1.0, 0.0)
+('RT @ReneeBestaPhoto: @charliekirk11 Quite a few have been released in my county of San Luis Obispo, CA. Our spineless sheriff was afraid… ', None, None, 0.0, 0.0, 1.0, 0.0)
+('It’s going to but fuck of Despacito wins the Grammy 😅😅😢😢😳😳', None, None, 0.269, 0.253, 0.479, 0.0772)
