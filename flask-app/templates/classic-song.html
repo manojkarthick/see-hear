@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>{{ song_document['Title'] }} - {{ song_document['Artist'] }}</title>
+
+		<!-- Bootstrap CSS -->
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+		<link rel="stylesheet" type="text/css" href="/static/style.css">
+		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+
+		<div class="container">
+			<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+			<div class="container">
+				<a class="navbar-brand" href="/">See-Hear</a>
+				<ul class="nav navbar-nav">
+					<li>
+						<a href="/hot100/overview">Hot 100</a>
+					</li>
+					<li>
+						<a href="/classic/overview/?genre=Country">Country</a>
+					</li>
+					<li>
+						<a href="/classic/overview/?genre=Pop">Pop</a>
+					</li>
+					<li>
+						<a href="/classic/overview/?genre=Rock">Rock</a>
+					</li>
+				</ul>
+			</div>
+			</nav>
+			<br>
+			<br>
+			<br>
+			<div class="row">
+			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+				<div class="thumbnail">
+					{% if song_document['Thumbnail'] == '' %}
+					<img src="http://freshaudio.xyz/content/default.jpg" style="width: 200px; height: 200px">
+					{% else %}
+					<img src="{{ song_document['Thumbnail'] }}" style="width: 200px; height: 200px">
+					{% endif %}
+				</div>
+			</div>
+			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+				<br/>
+				<br/>
+				    
+				<table class="table table-bordered">
+					<tbody>
+				      <tr>
+				        <td><b>Title</b></td>
+				        <td>{{ song_document['Title'] }}</td>
+				      </tr>
+				      <tr>
+				        <td><b>Artist</b></td>
+				        <td>{{ song_document['Artist'] }}</td>
+				      </tr>
+				      <tr>
+				        <td><b>Duration</b></td>
+				        {% set minutes=(song_document['Duration']/(1000*60))%60 %}
+    					{% set minutes = minutes|int %}
+    					{% set seconds=(song_document['Duration']/1000)%60 %}
+    					{% set seconds = seconds|int %}
+				        <td>{{ minutes|string + ':' + seconds|string }}</td>
+				      </tr>
+				    </tbody>
+				</table>
+			</div>
+			</div>
+			<div class="row">
+				<h4 style="margin-left: 467px; margin-bottom: 4px">Audio Features Analysis</h4>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					{{ norm_div|safe }}
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					{{ other_div|safe }}
+				</div>
+				<div class="row">
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						{{ tone_div|safe if tone_div != None else '' }}
+					</div>
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<h4><center>Lyrics Wordcloud</center></h4>
+						<img src="/static/lyrics-wordcloud/{{ song_document['ID'] }}.png" alt="" style="width: 500px; height:350px">
+					</div>
+				</div>
+				{% if table_lines|length > 0%}
+				<div>
+					<table class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th><b>Lyric</b></th>
+								<th><b>Anger</b></th>
+								<th><b>Fear</b></th>
+								<th><b>Joy</b></th>
+								<th><b>Sadness</b></th>
+								<th><b>Analytical</b></th>
+								<th><b>Confident</b></th>
+								<th><b>Tentative</b></th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for line in table_lines %}
+							<tr>
+							<td><font color="black">{{ line[0] }}</font></td>
+							<td><font color="red">{{ line[1] }}</font></td>
+							<td><font color="brown">{{ line[2] }}</font></td>
+							<td><font color="green">{{ line[3] }}</font></td>
+							<td><font color="orange">{{ line[4] }}</font></td>
+							<td><font color="blue">{{ line[5] }}</font></td>
+							<td><font color="purple">{{ line[6] }}</font></td>
+							<td><font color="STEELBLUE">{{ line[7] }}</font></td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				{% endif %}
+				</div>
+		</div>
+		<!-- jQuery -->
+		<script src="//code.jquery.com/jquery.js"></script>
+		<!-- Bootstrap JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	</body>
+</html>
