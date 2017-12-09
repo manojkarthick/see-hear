@@ -1,0 +1,36 @@
+db.EvaluatedSentiments.aggregate([
+    { "$match": {
+        ID: '7zLGHiDWd9T1Rxw4PQCb13'
+    }},
+    { "$group": {
+        _id: null,
+        "mean_positive": { $avg: "$Positive" }
+    }}
+])
+
+
+db.Tweets.aggregate([{$group:{_id:'$ID', mean_positive:{$avg:'$Positive'}}}])
+
+
+
+db.articles.aggregate( [
+  { $match: { $ID : '7zLGHiDWd9T1Rxw4PQCb13'} },
+  { $group: { _id: null, mean: { $avg: '$Positive' } } }
+] )
+
+
+
+db.Tweets.aggregate([{"$match":{ID:'7zLGHiDWd9T1Rxw4PQCb13'}},{"$group": {_id: null,"mean_positive":{$avg: "$Positive" }}}])
+
+db.Rock.aggregate([{'$sort':{'Danceability':1}},{'$limit':10}])
+
+db.hot100.aggregate([{$group:{_id:'$Genre', count:{$sum:1}}}])
+
+
+db.hot100.aggregate([{'$group' :{'_id':{'Genre':"$Genre"}, 'count':{'$sum':1}}},{'$sort':{'count':-1}}])
+
+
+
+db.hot100.find().snapshot().forEach(function(elem){db.hot100.update({_id: elem._id},{$set:{boring: elem.Loudness + elem.Tempo + (elem.Energy*100) + (elem.Danceability*100)}});})
+
+db.hot100.aggregate([{$group :{_id:{Genre:"$Genre"}, mean:{$avg:'$boring'}}}, {$sort:{mean:-1}},{$limit:6}])

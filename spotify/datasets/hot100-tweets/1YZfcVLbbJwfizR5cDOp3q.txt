@@ -1,0 +1,6 @@
+("RT @buffalosouljah1: Chris brown, Drake,lil Wayne,Migos,Rihanna,Kanye all of them couldn't even do a young 30000 😂 @CassperNyovest don rais…", None, None, 0.0, 0.0, 1.0, 0.0)
+("RT @buffalosouljah1: Chris brown, Drake,lil Wayne,Migos,Rihanna,Kanye all of them couldn't even do a young 30000 😂 @CassperNyovest don rais…", None, None, 0.0, 0.0, 1.0, 0.0)
+("@Migos can y'all sign me fr 💯💯 my music is good 🔥🔥💪💪💪", None, None, 0.209, 0.0, 0.791, 0.4404)
+("RT @buffalosouljah1: Chris brown, Drake,lil Wayne,Migos,Rihanna,Kanye all of them couldn't even do a young 30000 😂 @CassperNyovest don rais…", None, None, 0.0, 0.0, 1.0, 0.0)
+("RT @RappersSaid: Y'all love Migos but y'all still don't know Quavo is Takeoff's uncle and Offset is Quavo's cousin.", None, None, 0.126, 0.0, 0.874, 0.3818)
+('Migos - What The Price -@Migos TUNE https://t.co/bqjSfy5tmz', None, None, 0.0, 0.0, 1.0, 0.0)
